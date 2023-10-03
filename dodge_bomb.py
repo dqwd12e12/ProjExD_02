@@ -10,6 +10,10 @@ delta = {  # 練習３：移動量辞書
     pg.K_RIGHT: (+5, 0),
 }
 
+
+
+
+
 def check_bound(obj_rct: pg.Rect):
     """
     引数：こうかとんRectかばくだんRect
@@ -30,6 +34,8 @@ def main():
     """こうかとん"""
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+
+
     kk_rct = kk_img.get_rect()
     kk_rct.center = (900, 400)  # 練習３：こうかとんの初期座標を設定する
     """ばくだん"""
@@ -43,7 +49,15 @@ def main():
 
     clock = pg.time.Clock()
     tmr = 0
-    
+
+    kk_img2= pg.transform.flip(kk_img, True, False),
+    direction = {
+        pg.K_UP: pg.transform.remote(kk_img2, , 90), 
+        pg.K_RIGHT: pg.transform.flip(kk_img, True, False),
+        pg.K_LEFT: pg.transform.remote(kk_img, 0)
+    } #鳥の向き
+
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -58,6 +72,11 @@ def main():
         """こうかとん"""
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
+
+        for key, mv1 in direction.items():
+            if key_lst[key]:
+                kk_img = mv1
+
         for key, mv in delta.items():
             if key_lst[key]:
                 sum_mv[0] += mv[0]  # 練習３：横方向の合計移動量
