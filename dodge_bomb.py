@@ -49,8 +49,12 @@ def main():
             if event.type == pg.QUIT: 
                 return
 
+        if kk_rct.colliderect(bd_rct):  # 練習５：ぶつかってたら
+            print("ゲームオーバー")
+            return
+
         screen.blit(bg_img, [0, 0])
-        screen.blit(kk_img, [900, 400])
+        
         """こうかとん"""
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
@@ -74,7 +78,6 @@ def main():
 
         pg.display.update()
         tmr += 1
-        clock.tick(10)
         clock.tick(50)
 
 
