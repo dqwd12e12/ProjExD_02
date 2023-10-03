@@ -50,12 +50,13 @@ def main():
     clock = pg.time.Clock()
     tmr = 0
 
-    kk_img2= pg.transform.flip(kk_img, True, False),
+    kk_img2= pg.transform.flip(kk_img, True, False)
     direction = {
-        pg.K_UP: pg.transform.remote(kk_img2, , 90), 
+        pg.K_UP: pg.transform.rotate(kk_img2, 90), 
         pg.K_RIGHT: pg.transform.flip(kk_img, True, False),
-        pg.K_LEFT: pg.transform.remote(kk_img, 0)
-    } #鳥の向き
+        pg.K_LEFT: pg.transform.rotate(kk_img, 0),
+        pg.K_DOWN: pg.transform.rotate(kk_img2, -90),
+    } #鳥の向き 追加機能1 修正済み 
 
 
     while True:
@@ -73,9 +74,9 @@ def main():
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
 
-        for key, mv1 in direction.items():
+        for key, pc in direction.items():
             if key_lst[key]:
-                kk_img = mv1
+                kk_img = pc #追加機能1実行
 
         for key, mv in delta.items():
             if key_lst[key]:
